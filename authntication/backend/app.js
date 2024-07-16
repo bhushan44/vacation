@@ -30,7 +30,7 @@ const {
   getTour,
   deleteTour,
 } = require("./controllers/tourcontroller");
-const { createReview, getReviews } = require("./controllers/reviewcontroller");
+const { createReview, getReviews, createOrUpdateReview } = require("./controllers/reviewcontroller");
 const { sendotp } = require("./controllers/otpcontroller");
 const{createBooking, getBookings,getCheckOutSession}=require("./controllers/bookingcontroller")
 dotenv.config({ path: "./config.env" });
@@ -103,7 +103,7 @@ app.route("/api/v1/tours/:id").patch(upload2,updateTour);
 app.route("/api/v1/tours").get(getAllTours);
 app.route("/api/v1/tours/:id").get(getTour)
 // app.route("/api/v1/tours/:id").get(getTour).delete(deleteTour);
-app.route("/api/v1/reviews/:id").post(createReview).get(getReviews);
+app.route("/api/v1/reviews/:tourId").post(protect,createOrUpdateReview).get(getReviews);
 app.route("/api/v1/createbooking/:userid/:tourid/:price").get(createBooking)
 app.route("/api/v1/getbookings").get(protect,getBookings)
 app.route("/api/v1/bookings/checkout-session/:tourId").get(protect,getCheckOutSession)

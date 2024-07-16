@@ -25,7 +25,7 @@ function App() {
             <Route path="/otp" element={<Otp></Otp>} />
             <Route path="/overview/:id" element={<TourOverView></TourOverView>} />
             <Route path="/bookings" element={<Bookings></Bookings>}/>
-            <Route path="/createReview" element={<Review></Review>}/>
+            <Route path="/createReview/:tourId/:name" element={<Review></Review>}/>
           </Routes>
         </BrowserRouter>
         {/* <Signup></Signup> */}

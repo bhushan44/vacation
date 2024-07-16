@@ -1,46 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Review = ({ tourId }) => {
-  const [reviews, setReviews] = useState([]);
+const Review = ({ tourId, name }) => {
+    const params=useParams()
   const [newReview, setNewReview] = useState({ review: '', rating: 5 });
-  const [isFormVisible, setIsFormVisible] = useState(false);
-
-//   useEffect(() => {
-//     async function fetchReviews() {
-//       const response = await fetch(`http://localhost:5000/api/v1/tours/${tourId}/reviews`);
-//       const result = await response.json();
-//       setReviews(result.data);
-//     }
-//     fetchReviews();
-//   }, [tourId]);
+  const [isFormVisible, setIsFormVisible] = useState(true); // Show the form by default
 
   async function submitReview(event) {
     event.preventDefault();
-    await fetch(`http://localhost:5000/api/v1/tours/${tourId}/reviews`, {
+    // console.log("t",tourId)
+   const res= await fetch(`http://localhost:5000/api/v1/reviews/${params.tourId}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newReview),
+      body: JSON.stringify({review:newReview.rating,rating:newReview.review}),
     });
+    const result=await res.json()
+    console.log(result,"re")
     setNewReview({ review: '', rating: 5 });
+    // Optionally hide the form after submission
     setIsFormVisible(false);
-    // Re-fetch reviews after submission
-    const response = await fetch(`http://localhost:5000/api/v1/tours/${tourId}/reviews`);
-    const result = await response.json();
-    setReviews(result.data);
   }
 
   return (
     <div className="p-5">
-      <h3 className="font-bold">Reviews</h3>
-      {reviews.map((review) => (
-        <div key={review._id} className="mb-2">
-          <p><strong>{review.user.name}</strong> ({review.rating}/5)</p>
-          <p>{review.review}</p>
-        </div>
-      ))}
+      <h3 className="font-bold mb-2">Create a Review for {params.name}</h3>
       {1 ? (
         <form onSubmit={submitReview}>
           <textarea
@@ -67,12 +53,7 @@ const Review = ({ tourId }) => {
           </button>
         </form>
       ) : (
-        <button
-          onClick={() => setIsFormVisible(true)}
-          className="bg-green-400 rounded-lg border-2 border-solid text-white p-2"
-        >
-          Add Review
-        </button>
+        <p>Review submitted successfully!</p>
       )}
     </div>
   );

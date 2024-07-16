@@ -5,7 +5,7 @@ const reviewSchema = new mongoose.Schema({
     required: [true, "review must not be empty"],
   },
   rating: {
-    type: Number,
+    type: String,
     required: [true, "tour must have rating"],
   },
   createdAt: {
