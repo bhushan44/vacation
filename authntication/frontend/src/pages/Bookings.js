@@ -18,7 +18,7 @@ export default function Bookings() {
   }
 
   async function getTours() {
-    let result = await fetch("http://localhost:5000/api/v1/getbookings", {
+    let result = await fetch("https://bootcamp-wine.vercel.app/api/v1/getbookings", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -41,7 +41,7 @@ export default function Bookings() {
         {data?.map((el) => (
           <div key={el._id} className="bg-white h-auto w-[300px] flex flex-col gap-1 m-10">
             <img
-              src={`http://localhost:5000/images/tours/${el.tour.imageCover}`}
+              src={`https://bootcamp-wine.vercel.app/images/tours/${el.tour.imageCover}`}
               alt="Tour"
               className="w-[300px] h-52"
             />

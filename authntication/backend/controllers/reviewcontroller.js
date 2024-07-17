@@ -84,8 +84,14 @@ async function createOrUpdateReview(req,res) {
       }
     );
     console.log("Review created or updated:", reviewres);
+    res.json({
+      status:"succesfuuly crated review"
+    })
   } catch (error) {
     console.error("Error creating or updating review:", error);
+    res.json({
+      status:e.message
+    })
   }
 }
 

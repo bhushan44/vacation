@@ -12,7 +12,7 @@ export default function Login() {
   //   const navigate = useNavigate();
   async function handlesubmit() {
     try {
-      const res = await fetch("http://localhost:5000/api/v1/login", {
+      const res = await fetch("https://bootcamp-wine.vercel.app/api/v1/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -102,6 +102,9 @@ app.route("/api/v1/tours").post(createTour);
 app.route("/api/v1/tours/:id").patch(upload2,updateTour);
 app.route("/api/v1/tours").get(getAllTours);
 app.route("/api/v1/tours/:id").get(getTour)
+app.get("/", (req, res) => {
+  res.send("Welcome to the API!");
+});
 // app.route("/api/v1/tours/:id").get(getTour).delete(deleteTour);
 app.route("/api/v1/reviews/:tourId").post(protect,createOrUpdateReview).get(getReviews);
 app.route("/api/v1/createbooking/:userid/:tourid/:price").get(createBooking)
